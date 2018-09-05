@@ -1,11 +1,11 @@
 package com.alstutor.student_test_api
 
 import com.github.fakemongo.junit.FongoRule
-import com.alstutor.student_test_api.model.Student
-import com.alstutor.student_test_api.model.StudentInfo
-import com.alstutor.student_test_api.model.Group
-import com.alstutor.student_test_api.model.GroupInfo
-import com.alstutor.student_test_api.repository.StudentRepository
+import com.alstutor.student_rest_api.repository.StudentRepository
+import com.alstutor.student_rest_api.model.GroupInfo
+import com.alstutor.student_rest_api.model.Group
+import com.alstutor.student_rest_api.model.Student
+import com.alstutor.student_rest_api.model.StudentInfo
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -30,7 +30,7 @@ abstract class StudentServiceFongoTest(val initializeTestData: Boolean = true) {
             studentRepository.save(TEST_STUDENT3)
 
             val TEST_GROUP1_INFO = GroupInfo(TEST_GROUP1)
-            TEST_GROUP1.students.add(TEST_STUDENT1)
+            TEST_GROUP1.students.add(StudentInfo(TEST_STUDENT1))
         }
     }
 
