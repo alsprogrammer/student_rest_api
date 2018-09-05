@@ -1,4 +1,4 @@
-package com.alstutor.student_rest_api
+package com.alstutor.studentrestapi
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

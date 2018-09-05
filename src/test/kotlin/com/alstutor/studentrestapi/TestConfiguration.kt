@@ -1,4 +1,4 @@
-package com.alstutor.student_rest_api
+package com.alstutor.studentrestapi
 
 import com.github.fakemongo.Fongo
 import com.mongodb.MongoClient

@@ -1,7 +1,7 @@
-package com.alstutor.student_rest_api.repository
+package com.alstutor.studentrestapi.repository
 
-import com.alstutor.student_rest_api.model.Student
-import com.alstutor.student_rest_api.model.Group
+import com.alstutor.studentrestapi.model.Student
+import com.alstutor.studentrestapi.model.Group
 
 import org.springframework.data.repository.CrudRepository
 

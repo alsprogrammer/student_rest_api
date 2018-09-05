@@ -1,4 +1,4 @@
-package com.alstutor.student_rest_api.model
+package com.alstutor.studentrestapi.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias

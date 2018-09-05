@@ -1,8 +1,8 @@
-package com.alstutor.student_rest_api.service
+package com.alstutor.studentrestapi.service
 
-import com.alstutor.student_rest_api.model.Student
-import com.alstutor.student_rest_api.model.Group
-import com.alstutor.student_rest_api.repository.StudentRepository
+import com.alstutor.studentrestapi.model.Student
+import com.alstutor.studentrestapi.model.Group
+import com.alstutor.studentrestapi.repository.StudentRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

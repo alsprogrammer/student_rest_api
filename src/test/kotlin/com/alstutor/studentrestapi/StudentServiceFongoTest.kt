@@ -1,11 +1,12 @@
-package com.alstutor.student_test_api
+package com.alstutor.studenttestapi
 
 import com.github.fakemongo.junit.FongoRule
-import com.alstutor.student_rest_api.repository.StudentRepository
-import com.alstutor.student_rest_api.model.GroupInfo
-import com.alstutor.student_rest_api.model.Group
-import com.alstutor.student_rest_api.model.Student
-import com.alstutor.student_rest_api.model.StudentInfo
+import com.alstutor.studentrestapi.repository.StudentRepository
+import com.alstutor.studentrestapi.repository.GroupRepository
+import com.alstutor.studentrestapi.model.GroupInfo
+import com.alstutor.studentrestapi.model.Group
+import com.alstutor.studentrestapi.model.Student
+import com.alstutor.studentrestapi.model.StudentInfo
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -21,6 +22,7 @@ abstract class StudentServiceFongoTest(val initializeTestData: Boolean = true) {
 
     @Autowired
     lateinit var studentRepository: StudentRepository
+    lateinit var groupRepository: GroupRepository
 
     @Before
     fun setupTestDatabase() {
@@ -29,16 +31,21 @@ abstract class StudentServiceFongoTest(val initializeTestData: Boolean = true) {
             studentRepository.save(TEST_STUDENT2)
             studentRepository.save(TEST_STUDENT3)
 
-            val TEST_GROUP1_INFO = GroupInfo(TEST_GROUP1)
             TEST_GROUP1.students.add(StudentInfo(TEST_STUDENT1))
+            TEST_GROUP1.students.add(StudentInfo(TEST_STUDENT2))
+            TEST_GROUP2.students.add(StudentInfo(TEST_STUDENT3))
+
+            groupRepository.save(TEST_GROUP1)
+            groupRepository.save(TEST_GROUP2)
         }
     }
 
     companion object {
-        val TEST_GROUP1 = Group(name="БКБ16-01", creationYear=2015, term=1)
+        val TEST_GROUP1 = Group(name="БКБ16-01", creationYear=2016, term=1)
+        private val TEST_GROUP1_INFO = GroupInfo(TEST_GROUP1)
 
-        val TEST_GROUP2 = Group(name="БКБ17-01", creationYear=2015, term=1)
-        val TEST_GROUP2_INFO = GroupInfo(TEST_GROUP2)
+        val TEST_GROUP2 = Group(name="БКБ17-01", creationYear=2017, term=1)
+        private val TEST_GROUP2_INFO = GroupInfo(TEST_GROUP2)
 
         val TEST_STUDENT1 = Student(firstName="Иван", surName="Петрович", lastName="Сидоров", group=TEST_GROUP1_INFO)
         val TEST_STUDENT2 = Student(firstName="Петр", surName="Иванович", lastName="Сидоров", group=TEST_GROUP1_INFO)
