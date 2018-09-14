@@ -22,6 +22,7 @@ interface StudentService {
 class StudentServiceImpl : StudentService {
     @Autowired
     lateinit var studentRepository: StudentRepository
+    @Autowired
     lateinit var groupRepository: GroupRepository
 
     override fun studentById(id: String): Student = studentRepository.getById(id)

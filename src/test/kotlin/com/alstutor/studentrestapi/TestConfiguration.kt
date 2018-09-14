@@ -1,6 +1,6 @@
 package com.alstutor.studentrestapi
 
-import com.github.fakemongo.Fongo
+//import com.github.fakemongo.Fongo
 import com.mongodb.MongoClient
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -18,7 +18,8 @@ class TestConfiguration: AbstractMongoConfiguration() {
 
     override fun mongoClient(): MongoClient {
         logger.info("Creating Fongo fake mongo DB: $databaseName")
-        return Fongo(databaseName).mongo
+        //return Fongo(databaseName).mongo
+        return MongoClient("192.168.0.2", 27017)
     }
 
     companion object {

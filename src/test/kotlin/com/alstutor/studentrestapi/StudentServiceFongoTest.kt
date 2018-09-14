@@ -1,6 +1,6 @@
 package com.alstutor.studenttestapi
 
-import com.github.fakemongo.junit.FongoRule
+//import com.github.fakemongo.junit.FongoRule
 import com.alstutor.studentrestapi.repository.StudentRepository
 import com.alstutor.studentrestapi.repository.GroupRepository
 import com.alstutor.studentrestapi.model.GroupInfo
@@ -8,6 +8,7 @@ import com.alstutor.studentrestapi.model.Group
 import com.alstutor.studentrestapi.model.Student
 import com.alstutor.studentrestapi.model.StudentInfo
 import org.junit.Before
+import org.junit.After
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,11 +18,12 @@ import org.springframework.test.context.junit4.SpringRunner
 @RunWith(SpringRunner::class)
 @SpringBootTest
 abstract class StudentServiceFongoTest(val initializeTestData: Boolean = true) {
-    @get:Rule
-    val FongoRule = FongoRule()
+    //@get:Rule
+    //val FongoRule = FongoRule()
 
     @Autowired
     lateinit var studentRepository: StudentRepository
+    @Autowired
     lateinit var groupRepository: GroupRepository
 
     @Before
@@ -40,11 +42,21 @@ abstract class StudentServiceFongoTest(val initializeTestData: Boolean = true) {
         }
     }
 
+    @After
+    fun cleanUpTestDatabase() {
+        studentRepository.delete(TEST_STUDENT1)
+        studentRepository.delete(TEST_STUDENT2)
+        studentRepository.delete(TEST_STUDENT3)
+
+        groupRepository.delete(TEST_GROUP1)
+        groupRepository.delete(TEST_GROUP2)
+    }
+
     companion object {
-        val TEST_GROUP1 = Group(name="БКБ16-01", creationYear=2016, term=1)
+        var TEST_GROUP1 = Group(name="БКБ16-01", creationYear=2016, term=1)
         private val TEST_GROUP1_INFO = GroupInfo(TEST_GROUP1)
 
-        val TEST_GROUP2 = Group(name="БКБ17-01", creationYear=2017, term=1)
+        var TEST_GROUP2 = Group(name="БКБ17-01", creationYear=2017, term=1)
         private val TEST_GROUP2_INFO = GroupInfo(TEST_GROUP2)
 
         val TEST_STUDENT1 = Student(firstName="Иван", surName="Петрович", lastName="Сидоров", group=TEST_GROUP1_INFO)
