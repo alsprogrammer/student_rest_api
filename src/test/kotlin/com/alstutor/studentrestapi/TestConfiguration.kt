@@ -15,11 +15,12 @@ class TestConfiguration: AbstractMongoConfiguration() {
     lateinit var env: Environment
 
     override fun getDatabaseName() = env.getProperty("mongo.db.name", "test")
+    fun getDBHost(): String = env.getProperty("spring.data.mongodb.host", "192.168.0.2")
+    fun getDBPort(): Int = env.getProperty("spring.data.mongodb.port", "27017").toInt()
 
     override fun mongoClient(): MongoClient {
-        logger.info("Creating Fongo fake mongo DB: $databaseName")
-        //return Fongo(databaseName).mongo
-        return MongoClient("192.168.0.2", 27017)
+        logger.info("Creating fake mongo DB: $databaseName")
+        return MongoClient(getDBHost(), getDBPort())
     }
 
     companion object {
