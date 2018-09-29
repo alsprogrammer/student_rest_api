@@ -1,6 +1,5 @@
-package com.alstutor.studenttestapi
+package com.alstutor.studentrestapi
 
-//import com.github.fakemongo.junit.FongoRule
 import com.alstutor.studentrestapi.repository.StudentRepository
 import com.alstutor.studentrestapi.repository.GroupRepository
 import com.alstutor.studentrestapi.model.GroupInfo
@@ -9,7 +8,6 @@ import com.alstutor.studentrestapi.model.Student
 import com.alstutor.studentrestapi.model.StudentInfo
 import org.junit.Before
 import org.junit.After
-import org.junit.Rule
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
