@@ -17,12 +17,7 @@ class StudentController {
     lateinit var studentService: StudentService
     val gson = Gson()
 
-    @GetMapping("/studentsofgroup/{group}")
-    fun getStudents(@PathVariable groupId: String): String {
-        val students: List<Student> = studentService.studentsOfGroup(studentService.groupById(groupId))
-        val studentsJsonList = students.stream().map { gson.toJson(it) }.toList()
-        return gson.toJson(studentsJsonList)
-    }
-
-
+    @GetMapping("/studentsofgroup/{groupId}")
+    fun getStudents(@PathVariable groupId: String): List<Student>  =
+            studentService.studentsOfGroup(studentService.groupById(groupId))
 }

@@ -1,6 +1,6 @@
 package com.alstutor.studentrestapi.service
 
-import com.alstutor.studenttestapi.StudentServiceFongoTest
+import com.alstutor.studentrestapi.StudentServiceFongoTest
 import com.alstutor.studentrestapi.model.Student
 import com.alstutor.studentrestapi.model.StudentInfo
 import com.alstutor.studentrestapi.model.Group
