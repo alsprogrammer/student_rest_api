@@ -6,8 +6,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.test.web.servlet.MockMvc
 
 @AutoConfigureMockMvc
-abstract class StudentsTestFakeMongoDBMockMVC(itializeTestData: Boolean = true) :
-        StudentServiceFongoTest(itializeTestData) {
+abstract class StudentsTestFakeMongoDBMockMVC(initializeTestData: Boolean = true) :
+        StudentServiceFongoTest(initializeTestData) {
     @Autowired
     lateinit var mvc: MockMvc
 }
