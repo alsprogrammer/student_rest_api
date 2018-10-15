@@ -16,10 +16,11 @@ class GroupsStudentsTest : StudentsTestFakeMongoDBMockMVC() {
         result = result.andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
 
-        var index: Int = 0
+        var index = 0
         for(student in TEST_GROUP1.students) {
             result = result.andExpect(MockMvcResultMatchers.jsonPath("$[$index].id")
                                       .value(TEST_GROUP1.students[index].id))
+            index += 1
         }
     }
 
