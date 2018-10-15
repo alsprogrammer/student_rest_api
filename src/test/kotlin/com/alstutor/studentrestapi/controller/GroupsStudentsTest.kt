@@ -5,21 +5,19 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import com.google.gson.Gson
+import org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath
 
 class GroupsStudentsTest : StudentsTestFakeMongoDBMockMVC() {
     @Test
     fun checkGroupStudents() {
         logger.info("Begin students of group test")
 
-        val gson = Gson()
+        val result = mvc.perform(MockMvcRequestBuilders.get("/studentsofgroup/${TEST_GROUP1.id}"))
 
-        val expectedJson = gson.toJson(TEST_GROUP1.students).trimMargin()
-        logger.debug("Expected JSON is $expectedJson")
-
-        mvc.perform(MockMvcRequestBuilders.get("/studentsofgroup/${TEST_GROUP1.id}"))
-                .andExpect(MockMvcResultMatchers.status().isOk)
-                .andExpect(MockMvcResultMatchers.content().json(expectedJson))
+        result.andExpect(MockMvcResultMatchers.status().isOk)
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id")
+                        .value(TEST_GROUP1.students[0].id))
     }
 
     companion object {

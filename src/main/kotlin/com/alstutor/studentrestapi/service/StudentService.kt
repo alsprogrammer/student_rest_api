@@ -2,6 +2,7 @@ package com.alstutor.studentrestapi.service
 
 import com.alstutor.studentrestapi.model.Student
 import com.alstutor.studentrestapi.model.Group
+import com.alstutor.studentrestapi.model.GroupInfo
 import com.alstutor.studentrestapi.repository.StudentRepository
 import com.alstutor.studentrestapi.repository.GroupRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +12,7 @@ interface StudentService {
     fun studentById(id: String): Student
     fun studentByName(lastName: String, firstName: String, surName: String): List<Student>
     fun studentByNameAndGroup(lastName: String, firstName: String, surName: String, group: Group): List<Student>
-    fun studentsOfGroup(group: Group): List<Student>
+    fun studentsOfGroup(group: GroupInfo): List<Student>
     fun groupById(id: String): Group
     fun groupsByCreationYear(year: Int): List<Group>
     fun groupsByTerm(term: Int): List<Group>
@@ -30,7 +31,7 @@ class StudentServiceImpl : StudentService {
                     studentRepository.findByLastNameAndFirstNameAndSurNameAllIgnoreCase(lastName, firstName, surName)
     override fun studentByNameAndGroup(lastName: String, firstName: String, surName: String, group: Group): List<Student> = 
                     studentRepository.findByLastNameAndFirstNameAndSurNameAllIgnoreCaseAndGroup(lastName, firstName, surName, group)
-    override fun studentsOfGroup(group: Group): List<Student> = 
+    override fun studentsOfGroup(group: GroupInfo): List<Student> =
                     studentRepository.findByGroupOrderByLastNameAscFirstNameAscSurNameAsc(group)
     override fun groupById(id: String): Group = groupRepository.getById(id)
     override fun groupsByCreationYear(year: Int): List<Group> = groupRepository.findByCreationYear(year)

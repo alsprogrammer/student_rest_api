@@ -7,17 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.PathVariable
-import kotlin.streams.toList
-
-import com.google.gson.Gson
 
 @RestController
 class StudentController {
     @Autowired
     lateinit var studentService: StudentService
-    val gson = Gson()
 
     @GetMapping("/studentsofgroup/{groupId}")
     fun getStudents(@PathVariable groupId: String): List<Student>  =
-            studentService.studentsOfGroup(studentService.groupById(groupId))
+            studentService.studentsOfGroup(GroupInfo(studentService.groupById(groupId)))
 }
