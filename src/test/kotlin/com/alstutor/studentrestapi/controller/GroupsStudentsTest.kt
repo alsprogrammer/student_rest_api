@@ -5,6 +5,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.util.*
 
 class GroupsStudentsTest : StudentsTestFakeMongoDBMockMVC() {
     @Test
@@ -20,6 +21,24 @@ class GroupsStudentsTest : StudentsTestFakeMongoDBMockMVC() {
         for(student in TEST_GROUP1.students) {
             result = result.andExpect(MockMvcResultMatchers.jsonPath("$[$index].id")
                                       .value(TEST_GROUP1.students[index].id))
+            index += 1
+        }
+    }
+
+    @Test
+    fun checkUnknownGroup() {
+        logger.info("Begin unknown group test")
+
+        val fakeUuid = UUID.randomUUID().toString()
+        var result = mvc.perform(MockMvcRequestBuilders.get("/studentsofgroup/$fakeUuid"))
+
+        result = result.andExpect(MockMvcResultMatchers.status().isOk)
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+
+        var index = 0
+        for(student in TEST_GROUP1.students) {
+            result = result.andExpect(MockMvcResultMatchers.jsonPath("$[$index].id")
+                    .value(TEST_GROUP1.students[index].id))
             index += 1
         }
     }
